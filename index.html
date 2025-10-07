@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Job Application Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 35px 30px;
+            text-align: center;
+            position: relative;
+        }
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #25D366, #128C7E, #25D366);
+        }
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        .form-container {
+            padding: 35px;
+        }
+        .form-section {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eae5d9;
+        }
+        .section-title {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e6d2a9;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+        .section-title i {
+            margin-right: 10px;
+            font-size: 20px;
+            color: #2c3e50;
+        }
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #d4c9b1;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: #fefcf6;
+        }
+        .form-control:focus {
+            border-color: #2c3e50;
+            box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.1);
+            outline: none;
+            background: white;
+        }
+        .error-message {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            border-radius: 6px;
+            transition: all 0.2s;
+            border: 1px solid #eae5d9;
+            background: #fefcf6;
+        }
+        .option:hover {
+            background: #f9f7f1;
+            border-color: #d4c9b1;
+        }
+        .option input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        .option label {
+            font-weight: normal;
+            cursor: pointer;
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+        .scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            background: #f9f7f1;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #eae5d9;
+        }
+        .scale-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+        .scale-item input {
+            margin-bottom: 6px;
+        }
+        .scale-item label {
+            font-size: 14px;
+            font-weight: normal;
+        }
+        .submit-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: block;
+            margin: 35px auto 0;
+            transition: all 0.3s;
+            font-weight: 600;
+            width: 100%;
+            max-width: 280px;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+        .submit-btn:hover {
+            background: #1a252f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+        }
+        .submit-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .form-footer {
+            text-align: center;
+            margin-top: 35px;
+            font-size: 13px;
+            color: #7f8c8d;
+            border-top: 1px solid #eae5d9;
+            padding-top: 25px;
+        }
+        .required::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        .personal-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .loading-spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 18px 0;
+            text-align: center;
+            border-left: 4px solid #28a745;
+            font-size: 14px;
+        }
+        .field-hint {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
+        .question {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            padding: 0 10px;
+        }
+        .scale-labels small {
+            font-size: 11px;
+            color: #7f8c8d;
+        }
+        @media (max-width: 768px) {
+            .personal-details {
+                grid-template-columns: 1fr;
+            }
+            .form-container {
+                padding: 25px;
+            }
+            .header h1 {
+                font-size: 26px;
+            }
+            .header {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-briefcase"></i> Employment Application</h1>
+            <p>Join our team of professionals and build your career with us</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i> Application submitted successfully! Redirecting...
+            </div>
+            
+            <form id="jobApplicationForm">
+                <!-- Personal Details Section -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-user-tie"></i> Personal Information</h2>
+                    <div class="personal-details">
+                        <div class="form-group">
+                            <label for="fullName" class="required">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Enter your full name" required>
+                            <div class="error-message" id="nameError">Please enter your full name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber" class="required">Phone Number</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Enter your 10-digit phone number" required>
+                            <div class="error-message" id="phoneError">Please enter a valid 10-digit phone number</div>
+                            <div class="field-hint">Example: 9876543210</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="required">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required>
+                            <div class="error-message" id="emailError">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-group"> 
+                            <label for="address">Residential Address</label>
+                            <input type="text" id="address" name="address" class="form-control" placeholder="Enter your complete address">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Professional Details Section -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Details</h2>
+                    <div class="personal-details">
+                        <div class="form-group">
+                            <label for="position" class="required">Position Applying For</label>
+                            <input type="text" id="position" name="position" class="form-control" placeholder="Enter the position you're applying for" required>
+                            <div class="error-message" id="positionError">Please specify the position you're applying for</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="qualification" class="required">Educational Qualification</label>
+                            <input type="text" id="qualification" name="qualification" class="form-control" placeholder="Enter your highest qualification (e.g., B.Tech, MBA, B.Com)" required>
+                            <div class="error-message" id="qualificationError">Please enter your educational qualification</div>
+                            <div class="field-hint">Example: B.Tech Computer Science, MBA Marketing, B.Com</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="experience" class="required">Years of Experience</label>
+                            <select id="experience" name="experience" class="form-control" required>
+                                <option value="">Select your experience</option>
+                                <option value="Fresher">Fresher (0 years)</option>
+                                <option value="1-2 years">1-2 years</option>
+                                <option value="3-5 years">3-5 years</option>
+                                <option value="5-10 years">5-10 years</option>
+                                <option value="10+ years">10+ years</option>
+                            </select>
+                            <div class="error-message" id="experienceError">Please select your experience level</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="salary" class="required">Expected Salary (₹)</label>
+                            <input type="text" id="salary" name="salary" class="form-control" placeholder="Enter your expected salary" required>
+                            <div class="error-message" id="salaryError">Please enter your expected salary</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="noticePeriod" class="required">Notice Period</label>
+                            <select id="noticePeriod" name="noticePeriod" class="form-control" required>
+                                <option value="">Select notice period</option>
+                                <option value="Immediately">Immediately</option>
+                                <option value="15 days">15 days</option>
+                                <option value="30 days">30 days</option>
+                                <option value="60 days">60 days</option>
+                                <option value="90 days">90 days</option>
+                            </select>
+                            <div class="error-message" id="noticeError">Please select your notice period</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 1: How careful are you -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-user-check"></i> Professional Attributes</h2>
+                    <div class="form-group">
+                        <span class="question required">How would you rate your attention to detail?</span>
+                        <div class="scale">
+                            <div class="scale-item">
+                                <input type="radio" id="careful1" name="carefulness" value="1" required>
+                                <label for="careful1">1</label>
+                            </div>
+                            <div class="scale-item">
+                                <input type="radio" id="careful2" name="carefulness" value="2">
+                                <label for="careful2">2</label>
+                            </div>
+                            <div class="scale-item">
+                                <input type="radio" id="careful3" name="carefulness" value="3">
+                                <label for="careful3">3</label>
+                            </div>
+                            <div class="scale-item">
+                                <input type="radio" id="careful4" name="carefulness" value="4">
+                                <label for="careful4">4</label>
+                            </div>
+                            <div class="scale-item">
+                                <input type="radio" id="careful5" name="carefulness" value="5">
+                                <label for="careful5">5</label>
+                            </div>
+                        </div>
+                        <div class="scale-labels">
+                            <small>Needs Improvement</small>
+                            <small>Exceptional</small>
+                        </div>
+                        <div class="error-message" id="carefulnessError">Please rate your attention to detail</div>
+                    </div>
+                    
+                    <!-- Question 2: How Punctual are you -->
+                    <div class="form-group">
+                        <span class="question required">Which statement best describes your approach to punctuality?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="punctual1" name="punctuality" value="You can count on me" required>
+                                <label for="punctual1">You can count on me to always be on time</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="punctual2" name="punctuality" value="I try but can be late">
+                                <label for="punctual2">I make an effort but occasionally run late</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="punctual3" name="punctuality" value="Time does not really seem important to me">
+                                <label for="punctual3">I don't place much importance on strict timeliness</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="punctualityError">Please select your approach to punctuality</div>
+                    </div>
+                </div>
+                
+                <!-- Question 3: What kind of work do you like -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-tasks"></i> Work Style Preferences</h2>
+                    <div class="form-group">
+                        <span class="question required">Which work environment do you prefer?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="work1" name="workPreference" value="I like doing repetitive work everyday" required>
+                                <label for="work1">I prefer consistent, routine tasks each day</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="work2" name="workPreference" value="I like doing new task everyday">
+                                <label for="work2">I thrive on variety and new challenges daily</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="workPreferenceError">Please select your work environment preference</div>
+                    </div>
+                    
+                    <!-- Question 4: What do you like about repetitive work -->
+                    <div class="form-group">
+                        <span class="question required">What appeals to you about consistent, routine work?</span>
+                        <input type="text" class="form-control" name="repetitiveWork" placeholder="Please describe what you value in consistent work" required>
+                        <div class="error-message" id="repetitiveWorkError">Please describe what appeals to you about consistent work</div>
+                    </div>
+                </div>
+                
+                <!-- Question 5: What motivates you -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-bullseye"></i> Motivation & Career Goals</h2>
+                    <div class="form-group">
+                        <span class="question required">What is your primary motivation in a workplace?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="motivation1" name="motivation" value="I like being trusted" required>
+                                <label for="motivation1">Autonomy and being trusted with responsibilities</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="motivation2" name="motivation" value="I am working for the compensation only">
+                                <label for="motivation2">Competitive compensation and benefits</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="motivation3" name="motivation" value="I want to build a career">
+                                <label for="motivation3">Long-term career growth and development</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="motivationError">Please select your primary motivation</div>
+                    </div>
+                    
+                    <!-- Question 6: Why do you want this job -->
+                    <div class="form-group">
+                        <span class="question required">What is your primary reason for applying to this position?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="reason1" name="jobReason" value="For Compensation" required>
+                                <label for="reason1">The compensation package meets my needs</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="reason2" name="jobReason" value="To gain work experience till I get admission for further studies">
+                                <label for="reason2">To gain valuable experience before pursuing further education</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="reason3" name="jobReason" value="To gain work experience as I won't be going for higher education">
+                                <label for="reason3">To build work experience as I'm not planning on higher education</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="reason4" name="jobReason" value="I have nothing right now to do, I would like to build a career">
+                                <label for="reason4">I'm seeking to establish a career path and professional direction</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="jobReasonError">Please select your reason for applying</div>
+                    </div>
+                </div>
+                
+                <!-- Question 7: What is your Marital Status -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="fas fa-users"></i> Additional Information</h2>
+                    <div class="form-group">
+                        <span class="question required">What is your current marital status?</span>
+                        <div class="options">
+                            <div class="option">
+                                <input type="radio" id="status1" name="maritalStatus" value="Married" required>
+                                <label for="status1">Married</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="status2" name="maritalStatus" value="Unmarried">
+                                <label for="status2">Unmarried</label>
+                            </div>
+                        </div>
+                        <div class="error-message" id="maritalStatusError">Please select your marital status</div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <div class="loading-spinner" id="loadingSpinner"></div>
+                    <i class="fas fa-paper-plane"></i> SUBMIT APPLICATION
+                </button>
+                
+                <div class="form-footer">
+                    <p>We respect your privacy. Your information will never be shared with third parties.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('jobApplicationForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Real-time validation
+            const phoneInput = document.getElementById('phoneNumber');
+            const emailInput = document.getElementById('email');
+            
+            phoneInput.addEventListener('input', function() {
+                validatePhone(this.value);
+            });
+            
+            emailInput.addEventListener('input', function() {
+                validateEmail(this.value);
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    // Show loading state
+                    submitBtn.disabled = true;
+                    loadingSpinner.style.display = 'inline-block';
+                    
+                    // Collect all form data
+                    const formData = new FormData(this);
+                    const data = {};
+                    
+                    for (let [key, value] of formData.entries()) {
+                        data[key] = value;
+                    }
+                    
+                    // Format the message for WhatsApp and Gmail
+                    const message = formatApplicationMessage(data);
+                    
+                    // Send to WhatsApp
+                    sendToWhatsApp(message);
+                    
+                    // Send to Gmail
+                    sendToGmail(message, data.fullName);
+                    
+                    // Show success message
+                    successMessage.style.display = 'block';
+                    
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Reset form after submission
+                    setTimeout(function() {
+                        form.reset();
+                        submitBtn.disabled = false;
+                        loadingSpinner.style.display = 'none';
+                        successMessage.style.display = 'none';
+                    }, 4000);
+                }
+            });
+            
+            // Function to send to WhatsApp
+            function sendToWhatsApp(message) {
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappNumber = "917982910048";
+                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                
+                setTimeout(function() {
+                    window.open(whatsappURL, '_blank');
+                }, 500);
+            }
+            
+            // Function to send to Gmail
+            function sendToGmail(message, applicantName) {
+                const emailSubject = `Job Application - ${applicantName}`;
+                const emailBody = message;
+                const recipientEmail = "bhartiagarwal1973@gmail.com";
+                
+                const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${recipientEmail}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                
+                setTimeout(function() {
+                    window.open(gmailURL, '_blank');
+                }, 1500);
+            }
+            
+            // Function to validate the entire form
+            function validateForm() {
+                let isValid = true;
+                
+                // Validate required fields
+                const requiredFields = form.querySelectorAll('[required]');
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        showError(field, getErrorMessage(field));
+                        isValid = false;
+                    } else {
+                        hideError(field);
+                    }
+                });
+                
+                // Validate phone number
+                if (!validatePhone(phoneInput.value)) {
+                    showError(phoneInput, 'Please enter a valid 10-digit phone number');
+                    isValid = false;
+                }
+                
+                // Validate email
+                if (!validateEmail(emailInput.value)) {
+                    showError(emailInput, 'Please enter a valid email address');
+                    isValid = false;
+                }
+                
+                // Validate radio groups
+                const radioGroups = {};
+                const radioInputs = form.querySelectorAll('input[type="radio"]');
+                
+                radioInputs.forEach(radio => {
+                    if (!radioGroups[radio.name]) {
+                        radioGroups[radio.name] = false;
+                    }
+                    if (radio.checked) {
+                        radioGroups[radio.name] = true;
+                    }
+                });
+                
+                for (const groupName in radioGroups) {
+                    if (!radioGroups[groupName]) {
+                        const firstRadio = form.querySelector(`input[name="${groupName}"]`);
+                        showError(firstRadio, `Please select an option for ${getFieldLabel(groupName)}`);
+                        isValid = false;
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            // Function to validate phone number
+            function validatePhone(phone) {
+                const phoneRegex = /^[6-9]\d{9}$/;
+                return phoneRegex.test(phone.replace(/\D/g, ''));
+            }
+            
+            // Function to validate email
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            // Function to show error message
+            function showError(field, message) {
+                const errorElement = document.getElementById(`${field.name || field.id}Error`);
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                    field.style.borderColor = '#e74c3c';
+                }
+            }
+            
+            // Function to hide error message
+            function hideError(field) {
+                const errorElement = document.getElementById(`${field.name || field.id}Error`);
+                if (errorElement) {
+                    errorElement.style.display = 'none';
+                    field.style.borderColor = '#d4c9b1';
+                }
+            }
+            
+            // Function to get error message for a field
+            function getErrorMessage(field) {
+                const fieldName = field.name || field.id;
+                switch(fieldName) {
+                    case 'fullName': return 'Please enter your full name';
+                    case 'phoneNumber': return 'Please enter a valid phone number';
+                    case 'email': return 'Please enter a valid email address';
+                    case 'position': return 'Please specify the position';
+                    case 'qualification': return 'Please enter your educational qualification';
+                    case 'experience': return 'Please select your experience';
+                    case 'salary': return 'Please enter your expected salary';
+                    case 'noticePeriod': return 'Please select your notice period';
+                    default: return 'This field is required';
+                }
+            }
+            
+            // Function to get field label for error messages
+            function getFieldLabel(fieldName) {
+                const labels = {
+                    'carefulness': 'attention to detail',
+                    'punctuality': 'punctuality approach',
+                    'workPreference': 'work environment preference',
+                    'motivation': 'primary motivation',
+                    'jobReason': 'reason for applying',
+                    'maritalStatus': 'marital status'
+                };
+                return labels[fieldName] || fieldName;
+            }
+            
+            // Function to format the application message
+            function formatApplicationMessage(data) {
+                return `NEW JOB APPLICATION
+
+PERSONAL INFORMATION:
+• Name: ${data.fullName}
+• Phone: ${data.phoneNumber}
+• Email: ${data.email}
+• Address: ${data.address || 'Not provided'}
+
+PROFESSIONAL DETAILS:
+• Position: ${data.position}
+• Qualification: ${data.qualification}
+• Experience: ${data.experience}
+• Expected Salary: ${data.salary}
+• Notice Period: ${data.noticePeriod}
+
+PROFESSIONAL ATTRIBUTES:
+• Attention to Detail: ${data.carefulness}/5
+• Punctuality: ${data.punctuality}
+
+WORK PREFERENCES:
+• Work Style: ${data.workPreference}
+• About Repetitive Work: ${data.repetitiveWork}
+
+MOTIVATION & CAREER GOALS:
+• Primary Motivation: ${data.motivation}
+• Reason for Applying: ${data.jobReason}
+
+ADDITIONAL INFORMATION:
+• Marital Status: ${data.maritalStatus}
+
+Application submitted on: ${new Date().toLocaleString()}`;
+            }
+        });
+    </script>
+</body>
+</html>
